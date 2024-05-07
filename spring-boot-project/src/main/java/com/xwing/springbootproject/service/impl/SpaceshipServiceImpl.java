@@ -1,29 +1,26 @@
 package com.xwing.springbootproject.service.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 import com.xwing.springbootproject.exception.NotFoundException;
 import com.xwing.springbootproject.model.Spaceship;
 import com.xwing.springbootproject.repository.SpaceshipRepository;
 import com.xwing.springbootproject.service.SpaceshipService;
 
+@Service
 public class SpaceshipServiceImpl implements SpaceshipService {
 	
 	@Autowired
     private SpaceshipRepository spaceshipRepository;
 	
-	@Cacheable("spaceships")
-    public List<Spaceship> getAllSpaceships() {
-		return spaceshipRepository.findAll();
-	}
-	
 
 	@Override
+	@Cacheable("spaceships")
 	public Page<Spaceship> getAllSpaceships(Pageable pageable) {
 		return spaceshipRepository.findAll(pageable);
 	}
@@ -36,7 +33,7 @@ public class SpaceshipServiceImpl implements SpaceshipService {
 
 	@Override
 	public Page<Spaceship> searchSpaceshipsByName(String name, Pageable pageable) {
-		return spaceshipRepository.findByNameContainingIgnoreCase(name, pageable);
+		return spaceshipRepository.findByNameContaining(name, pageable);
 	}
 
 	@Override
@@ -45,6 +42,7 @@ public class SpaceshipServiceImpl implements SpaceshipService {
 	}
 
 	@Override
+	@CacheEvict(value = "spaceships", allEntries = true)
 	public Spaceship updateSpaceship(Long id, Spaceship newSpaceship) {
 		Spaceship spaceship = getSpaceshipById(id);
 		spaceship.setName(newSpaceship.getName());
@@ -55,4 +53,5 @@ public class SpaceshipServiceImpl implements SpaceshipService {
 	public void deleteSpaceship(Long id) {
 		spaceshipRepository.deleteById(id);
 	}
+	
 }

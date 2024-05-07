@@ -1,4 +1,4 @@
-package com.xwing.springbootproject;
+package com.xwing.springbootproject.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -6,24 +6,27 @@ import static org.mockito.Mockito.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 import com.xwing.springbootproject.model.Spaceship;
 import com.xwing.springbootproject.repository.SpaceshipRepository;
-import com.xwing.springbootproject.service.SpaceshipService;
+import com.xwing.springbootproject.service.impl.SpaceshipServiceImpl;
 
+@ExtendWith(MockitoExtension.class)
 public class SpaceshipServiceTest {
 
 	@Mock
     private SpaceshipRepository spaceshipRepository;
 
     @InjectMocks
-    private SpaceshipService spaceshipService;
+    private SpaceshipServiceImpl spaceshipService;
 
     @Test
     public void testGetAllSpaceships() {

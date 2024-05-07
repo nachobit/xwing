@@ -53,7 +53,7 @@ public class SpaceshipController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdSpaceship);
     }
     
-    // vMethod to upgrade an existing ship
+    // Method to upgrade an existing ship
     @PutMapping("/{id}")
     public ResponseEntity<Spaceship> updateSpaceship(@PathVariable Long id, @RequestBody Spaceship spaceship) {
     	Spaceship updatedSpaceship = spaceshipService.updateSpaceship(id, spaceship);
