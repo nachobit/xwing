@@ -33,7 +33,7 @@ public class SpaceshipServiceImpl implements SpaceshipService {
 
 	@Override
 	public Page<Spaceship> searchSpaceshipsByName(String name, Pageable pageable) {
-		return spaceshipRepository.findByNameContaining(name, pageable);
+		return spaceshipRepository.findByNameContainingIgnoreCase(name, pageable);
 	}
 
 	@Override

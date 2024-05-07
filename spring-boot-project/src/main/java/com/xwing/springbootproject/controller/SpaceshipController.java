@@ -25,7 +25,7 @@ public class SpaceshipController {
 	@Autowired
 	private SpaceshipService spaceshipService;
 
-	// Method to obtain all ships with pagination
+	// Method to obtain all spaceships with pagination
     @GetMapping
     public ResponseEntity<Page<Spaceship>> getAllSpaceships(Pageable pageable) {
         Page<Spaceship> spaceships = spaceshipService.getAllSpaceships(pageable);
@@ -39,28 +39,28 @@ public class SpaceshipController {
         return ResponseEntity.ok().body(spaceship);
     }
 
-    // Method to search for ships by a parameter in their name
+    // Method to search for spaceships by name
     @GetMapping("/search")
     public ResponseEntity<Page<Spaceship>> searchSpaceshipsByName(@RequestParam String nameParam, Pageable pageable) {
         Page<Spaceship> spaceships = spaceshipService.searchSpaceshipsByName(nameParam, pageable);
         return ResponseEntity.ok().body(spaceships);
     }
     
-    // Method to create a new ship
+    // Method to create a new spaceship
     @PostMapping
     public ResponseEntity<Spaceship> createSpaceship(@RequestBody Spaceship spaceship) {
     	Spaceship createdSpaceship = spaceshipService.createSpaceship(spaceship);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdSpaceship);
     }
     
-    // Method to upgrade an existing ship
+    // Method to upgrade an existing spaceship
     @PutMapping("/{id}")
     public ResponseEntity<Spaceship> updateSpaceship(@PathVariable Long id, @RequestBody Spaceship spaceship) {
     	Spaceship updatedSpaceship = spaceshipService.updateSpaceship(id, spaceship);
         return ResponseEntity.ok().body(updatedSpaceship);
     }
     
-    // Method to delete a ship by its id
+    // Method to delete a spaceship by its id
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteSpaceship(@PathVariable Long id) {
     	spaceshipService.deleteSpaceship(id);

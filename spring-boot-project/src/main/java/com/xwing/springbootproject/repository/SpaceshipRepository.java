@@ -10,6 +10,6 @@ import com.xwing.springbootproject.model.Spaceship;
 @Repository
 public interface SpaceshipRepository extends JpaRepository<Spaceship, Long> {
 	
-	Page<Spaceship> findByNameContaining(String name, Pageable pageable);
+	Page<Spaceship> findByNameContainingIgnoreCase(String name, Pageable pageable);
 
 }
