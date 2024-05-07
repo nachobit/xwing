@@ -13,11 +13,11 @@ public class LoggingAspect {
 	
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @After("execution(* com.xwing.springbootproject.controller.SpaceshipController.getSpaceshipById(..)) && args(id) && args(id)")
-    public void logNegativeIdRequest(JoinPoint joinPoint, Long id) {
-        if (id < 0) {
-            logger.info("Requested spacecraft with negative id: {}", id);
-        }
-    }
+//    @After("execution(* com.xwing.springbootproject.controller.SpaceshipController.getSpaceshipById(..)) && args(id) && args(id)")
+//    public void logNegativeIdRequest(JoinPoint joinPoint, Long id) {
+//        if (id < 0) {
+//            logger.info("Requested spaceship with negative id: {}", id);
+//        }
+//    }
 
 }

@@ -34,7 +34,7 @@ public class SpaceshipControllerTest {
 		when(spaceshipService.getAllSpaceships()).thenReturn(Arrays.asList(new Spaceship("Falcon"), new Spaceship("X-Wing")));
 
 		// HTTP GET Request
-		mockMvc.perform(get("/api/spacecrafts"))
+		mockMvc.perform(get("/api/spaceships"))
 		// Verify 200 Status OK
 		.andExpect(status().isOk())
 		// Verify JSON expected
