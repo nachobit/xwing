@@ -18,6 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.xwing.springbootproject.model.Spaceship;
 import com.xwing.springbootproject.service.SpaceshipService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
 @RestController
 @RequestMapping("/api/spaceships")
 public class SpaceshipController {
@@ -25,7 +29,11 @@ public class SpaceshipController {
 	@Autowired
 	private SpaceshipService spaceshipService;
 
-	// Method to obtain all spaceships with pagination
+	@Operation(summary = "Get all spaceships", description = "Get all spaceships with pagination")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successful operation"),
+            @ApiResponse(responseCode = "404", description = "Spaceships not found")
+    })
     @GetMapping
     public ResponseEntity<Page<Spaceship>> getAllSpaceships(Pageable pageable) {
         Page<Spaceship> spaceships = spaceshipService.getAllSpaceships(pageable);
