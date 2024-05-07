@@ -1,21 +1,17 @@
 package com.xwing.springbootproject.service;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import com.xwing.springbootproject.model.Spaceship;
-import com.xwing.springbootproject.repository.SpaceshipRepository;
 
-public class SpaceshipService {
+public interface SpaceshipService {
 	
-	@Autowired
-    private SpaceshipRepository spaceshipRepository;
-	
-	@Cacheable("spaceships")
-    public List<Spaceship> getAllSpaceships() {
-		return spaceshipRepository.findAll();
-	}
+	Page<Spaceship> getAllSpaceships(Pageable pageable);
+	Spaceship getSpaceshipById(Long id);
+	Page<Spaceship> searchSpaceshipsByName(String name, Pageable pageable);
+	Spaceship createSpaceship(Spaceship spaceship);
+	Spaceship updateSpaceship(Long id, Spaceship newSpaceship);
+	void deleteSpaceship(Long id);
 
 }
