@@ -54,20 +54,18 @@ public class SpaceshipIntegrationTest {
         when(spaceshipService.getSpaceshipById(1L)).thenReturn(spaceship);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/spaceships/1"))
-        		//.with(SecurityMockMvcRequestPostProcessors.httpBasic("user", "userPass")))
                .andExpect(MockMvcResultMatchers.status().isOk())
                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON));
     }
 	
 	@Test
-	@WithMockUser(username = "user2", roles = { "USER2" })
+	@WithMockUser(username = "user", roles = { "USER" })
     public void testGetSpaceshipSearch() throws Exception {
 	    String nameParam = "X-Wing";
 	    Pageable pageable = PageRequest.of(0, 10);
 	    List<Spaceship> spaceshipsList = Arrays.asList(new Spaceship("X-Wing"), new Spaceship("Y-Wing"));
 	    Page<Spaceship> spaceshipsPage = new PageImpl<>(spaceshipsList, pageable, spaceshipsList.size());
 
-        //when(spaceshipService.searchSpaceshipsByName(any(String.class), any(Pageable.class))).thenReturn(spaceships);
 		when(spaceshipService.searchSpaceshipsByName(nameParam, pageable)).thenReturn(spaceshipsPage);
         
 		mockMvc.perform(MockMvcRequestBuilders.get("/api/spaceships/search")

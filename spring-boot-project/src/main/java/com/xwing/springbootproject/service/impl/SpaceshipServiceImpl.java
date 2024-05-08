@@ -50,7 +50,15 @@ public class SpaceshipServiceImpl implements SpaceshipService {
 	@CacheEvict(value = "spaceships", allEntries = true)
 	public Spaceship updateSpaceship(Long id, Spaceship newSpaceship) {
 		Spaceship spaceship = getSpaceshipById(id);
-		spaceship.setName(newSpaceship.getName());
+		if (newSpaceship.getName() != null) {
+	        spaceship.setName(newSpaceship.getName());
+	    }
+	    if (newSpaceship.getType() != null) {
+	        spaceship.setType(newSpaceship.getType());
+	    }
+	    if (newSpaceship.getDescription() != null) {
+	        spaceship.setDescription(newSpaceship.getDescription());
+	    }
 		return spaceshipRepository.save(spaceship);
 	}
 
