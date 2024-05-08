@@ -42,7 +42,7 @@ public class SpaceshipServiceImpl implements SpaceshipService {
 	@Override
 	public Spaceship createSpaceship(Spaceship spaceship) {
 		Spaceship savedSpaceship = spaceshipRepository.save(spaceship);
-		messageProducer.sendMessage(savedSpaceship);
+		//messageProducer.sendMessage(savedSpaceship);
 		return savedSpaceship;
 	}
 
