@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.xwing.springbootproject.exception.NotFoundException;
+import com.xwing.springbootproject.messaging.MessageProducer;
 import com.xwing.springbootproject.model.Spaceship;
 import com.xwing.springbootproject.repository.SpaceshipRepository;
 import com.xwing.springbootproject.service.SpaceshipService;
@@ -18,6 +19,8 @@ public class SpaceshipServiceImpl implements SpaceshipService {
 	@Autowired
     private SpaceshipRepository spaceshipRepository;
 	
+	@Autowired
+	private MessageProducer messageProducer;
 
 	@Override
 	@Cacheable("spaceships")
@@ -38,7 +41,9 @@ public class SpaceshipServiceImpl implements SpaceshipService {
 
 	@Override
 	public Spaceship createSpaceship(Spaceship spaceship) {
-		return spaceshipRepository.save(spaceship);
+		Spaceship savedSpaceship = spaceshipRepository.save(spaceship);
+		messageProducer.sendMessage(savedSpaceship);
+		return savedSpaceship;
 	}
 
 	@Override
