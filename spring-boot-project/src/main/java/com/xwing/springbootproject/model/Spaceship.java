@@ -24,6 +24,12 @@ public class Spaceship {
 		this.name = name;
 	}
 
+	public Spaceship(String name, SpaceshipType type, String description) {
+		this.name = name;
+		this.type = type;
+		this.description = description;
+	}
+
 	public Long getId() {
 		return id;
 	}
