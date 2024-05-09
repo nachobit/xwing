@@ -3,7 +3,7 @@
 Desarrollar, utilizando Maven, Spring Boot, y Java, una API que permita hacer un mantenimiento CRUD de naves espaciales de series y películas.
 
 
-# Detalles Implementacion
+# Detalles Implementación requeridos
 
 ## Caching
 Permite mejorar el rendimiento de la aplicación almacenando en memoria los resultados de operaciones costosas, como consultas a bases de datos o cálculos complejos. Spring Boot proporciona soporte integrado para la caché a través de anotaciones como @Cacheable, @CacheEvict, @CachePut, entre otras, reduciendo así el número de ejecuciones en función de la información disponible en el caché.
